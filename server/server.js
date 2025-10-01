@@ -17,7 +17,7 @@ export const io = new Server(server,{
 })
 
 // Store online users
-export const userSocketMap = {} // {userId : socket.id}
+export  const userSocketMap = {} // {userId : socket.id}
 
 // Socket.io connection handler
 io.on("connection",(socket)=>{
@@ -46,13 +46,16 @@ app.use("/api/status",(req,res)=> res.send("Server is live"))
 app.use("/api/auth", userRouter)
 app.use("/api/messages", messageRouter)
 
-const PORT = process.env.PORT || 5000
 
 // Connecting to DB
 await connectDB()
 
+if (process.env.NODE_ENV !== "production") {
+    const PORT = process.env.PORT || 5000
+    server.listen(PORT,()=>{
+        console.log("Server is live at Port : "+PORT)   
+    })
+}
 
-server.listen(PORT,()=>{
-    console.log("Server is live at Port : "+PORT)   
-})
+export default server
 
