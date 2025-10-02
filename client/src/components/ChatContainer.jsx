@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext'
 
 const ChatContainer = () => {
 
-  const {message, selectedUsers,setSelectedUsers, sendMessage, getMessages} = useContext(ChatContext)
+  const {message, setMessage ,selectedUsers,setSelectedUsers, sendMessage, getMessages} = useContext(ChatContext)
   const {authUser, onlineUsers} = useContext(AuthContext)
   const scrollEnd = useRef()
 
@@ -15,7 +15,10 @@ const ChatContainer = () => {
     if (input.trim() === '') {
       return null
     }
-    await sendMessage({text : input.trim()})
+    const savedMessage = await sendMessage({text : input.trim()})
+    if (savedMessage) {
+       setMessage((prevMessages)=>[...prevMessages, savedMessage])
+    }
     setInput("")
   }
 
@@ -37,7 +40,7 @@ const ChatContainer = () => {
 
   const [input, setInput] = useState('')
 
-  useEffect(()=>{
+  useEffect(()=>{ 
     if (selectedUsers) {
       getMessages(selectedUsers._id)
     }
@@ -66,7 +69,7 @@ const ChatContainer = () => {
         {
           message.map((msg, index)=>(
             <div key={index} className={`flex items-end gap-2 justify-end ${
-              msg.senderId !== authUser._id 
+              msg.senderId !== authUser._id
               && 'flex-row-reverse'
             }`}>
               {

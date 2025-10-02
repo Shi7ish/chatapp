@@ -33,10 +33,12 @@ export const ChatProvider = (({children})=>{
             if (data.success) {
                 setMessage(data.messages)
             }
+
         } catch (error) {
             console.log(error.message)
             toast.error(error.message)
         }
+
     }
 
     // function to send message to the selected user
@@ -44,7 +46,7 @@ export const ChatProvider = (({children})=>{
         try {
             const {data} = await axios.post(`/api/messages/send/${selectedUsers._id}`,messageData)
             if (data.success) {
-                setMessage((prevMessages)=>[...prevMessages, data.newMessage])
+                return data.newMessage
             }else{
                 toast.error(data.message)
             }
@@ -59,7 +61,7 @@ export const ChatProvider = (({children})=>{
             return
         }
         socket.on("newMessage",async (newMessage)=>{
-            if (selectedUsers && newMessage.sender_Id === selectedUsers._id) {
+            if (selectedUsers && newMessage.senderId === selectedUsers._id) {
                 newMessage.seen = true
                 setMessage((prevMessages)=>[...prevMessages, newMessage])
                 await axios.put(`/api/messages/mark/${newMessage._id}`)

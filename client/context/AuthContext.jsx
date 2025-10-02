@@ -86,7 +86,6 @@ export const AuthProvider = ({children}) => {
                 userId : userData._id,
             }
         })
-
         newSocket.connect()
         setSocket(newSocket)
 
