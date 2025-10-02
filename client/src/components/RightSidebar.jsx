@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 const RightSidebar = () => {
 
-  const {selectedUsers, message} = useContext(ChatContext)
+  const {selectedUsers, message, view} = useContext(ChatContext)
   const {logout, onlineUsers} = useContext(AuthContext)
   const [msgImage, setMsgImage] = useState([])
 
@@ -19,7 +19,7 @@ const RightSidebar = () => {
     )
   },[message])
 
-  return selectedUser && (
+  return selectedUser && view && (
     <div className={`bg-[#8185B2]/10 text-white w-full relative overflow-y-scroll ${
       selectedUser ? "max-md:hidden" : ''
     }`}>

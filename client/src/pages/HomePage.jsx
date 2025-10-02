@@ -6,11 +6,11 @@ import { ChatContext } from '../../context/ChatContext'
 
 const HomePage = () => {
 
-  const {selectedUsers} = useContext(ChatContext)
+  const {selectedUsers, view} = useContext(ChatContext)
 
   return (
     <div className='border h-screen w-[100%] sm:px-[15%] sm:py-[5%] '>
-      <div className={`backdrop-blur-xl border-2 border-gray-600 rounded-2xl overflow-hidden h-[100%] grid grid-cols-1 relative ${selectedUsers ? ' md:grid-cols-[1fr_1.5fr_1fr] xl:grid-cols-[1fr_2fr_1fr]' : 'md:grid-cols-2'}`}>
+      <div className={`backdrop-blur-xl border-2 border-gray-600 rounded-2xl overflow-hidden h-[100%] grid grid-cols-1 relative ${selectedUsers && view ? ' md:grid-cols-[1fr_1.5fr_1fr] xl:grid-cols-[1fr_2fr_1fr]' : 'md:grid-cols-2'}`}>
         <Sidebar/>
         <ChatContainer/>
         <RightSidebar/>

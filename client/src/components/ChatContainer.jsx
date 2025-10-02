@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext'
 
 const ChatContainer = () => {
 
-  const {message, setMessage ,selectedUsers,setSelectedUsers, sendMessage, getMessages} = useContext(ChatContext)
+  const {message, setMessage ,selectedUsers,setSelectedUsers, sendMessage, getMessages, view} = useContext(ChatContext)
   const {authUser, onlineUsers} = useContext(AuthContext)
   const scrollEnd = useRef()
 
@@ -52,7 +52,7 @@ const ChatContainer = () => {
     }
   },[message])
 
-  return selectedUsers ? (
+  return selectedUsers && view ? (
     <div className=' h-full overflow-scroll relative backdrop-blur-lg'>
       {/* header */}
       <div className='flex items-center gap-3 py-3 mx-4 border-b border-stone-500'>
