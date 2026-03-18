@@ -55,15 +55,15 @@ const LoginPage = () => {
           {currentState === 'Sign Up' ? "Create Account" : "Login Now"}
         </button>
 
-        <div className='flex items-center gap-2 text-sm text-gray-500'>
+        <div className='flex items-center gap-2 text-sm text-gray-300'>
           <input type="checkbox" required/>
           <p>Agree to the terms of use & privacy policy.</p>
         </div> 
         <div className='flex flex-col gap-2'>
           {currentState === "Sign Up" ? (
-            <p className='text-sm text-gray-600'>Already have an account ? <span className='font-medium text-violet-500 cursor-pointer ' onClick={()=>{setCurrentState("Login"); setIsDataSubmitted(false)}}>Login here</span></p>
+            <p className='text-sm text-gray-300'>Already have an account ? <span className='font-medium text-violet-500 cursor-pointer ' onClick={()=>{setCurrentState("Login"); setIsDataSubmitted(false)}}>Login here</span></p>
           ) : (
-            <p className='text-sm text-gray-600'>Create an account <span className='font-medium text-violet-500 cursor-pointer ' onClick={()=>setCurrentState('Sign Up')}>Click here</span></p>
+            <p className='text-sm text-gray-300'>Create an account <span className='font-medium text-violet-500 cursor-pointer ' onClick={()=>setCurrentState('Sign Up')}>Click here</span></p>
           )}
         </div>
 
